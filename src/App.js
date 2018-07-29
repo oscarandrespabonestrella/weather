@@ -54,11 +54,11 @@ class App extends Component {
     try{
       if(Currentweather == null){
         Currentweather = await DarkSkyApi.loadCurrent(position)
-        localStorage.setItem('currentweather',JSON.stringify(Currentweather))
+        // localStorage.setItem('currentweather',JSON.stringify(Currentweather))
       }
       if(weather == null){
         weather = await DarkSkyApi.loadForecast(position)
-        localStorage.setItem('weatherForecast',JSON.stringify(weather))
+        // localStorage.setItem('weatherForecast',JSON.stringify(weather))
       }
       this.setState({weatherCity:Currentweather,forecastCity : weather,position:position});
       this.setState({classBackground:Currentweather.icon})
