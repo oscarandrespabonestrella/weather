@@ -20,5 +20,28 @@
   font-size: 1em;
 }
 
+.App-intro {
+  font-size: large;
+}
 
+
+.hot{
+  background: #22c1c3;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #fdbb2d, #22c1c3);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #fdbb2d, #22c1c3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+
+.location-search-input{
+  background: transparent;
+  border:0;
+  border-bottom: 2px solid #ddd;
+  padding: 10px 5px;
+  width: 100%;
+  color: #fff;
+  font-size: 20px;
+  &:focus{
+    outline: 0px;
+  }
+}
 
