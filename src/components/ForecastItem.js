@@ -35,7 +35,7 @@ class ForecasItem extends Component {
                 <ReactTooltip  id={toltipID}>
                     <h4>{this.props.day}</h4>
                     <p>Min. Temperature: {this.props.extraData.temperatureMin}</p>
-                    <p>Precipitation: {this.props.extraData.precipIntensity}%</p>
+                    <p>Precipitation: {this.props.extraData.rain}%</p>
                     <p>Wind: {this.props.extraData.windSpeed}Km/h</p>
                     <p>Pressure: {this.props.extraData.pressure}atm</p>
                 </ReactTooltip>
