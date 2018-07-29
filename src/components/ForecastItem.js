@@ -24,7 +24,7 @@ class ForecasItem extends Component {
     }
     render(){
         let Icon = this.state.icon[this.props.icon]
-        let toltipID = "toolTip"+this.props.key
+        let toltipID = "toolTip"+this.props.id
         return (
             <div data-type="light" data-tip='' data-for={toltipID} className="graph-knob">
                 <span className="graph-temp">
@@ -33,6 +33,7 @@ class ForecasItem extends Component {
                   {this.props.day}
                 </span>
                 <ReactTooltip  id={toltipID}>
+                    <h4>{this.props.day}</h4>
                     <p>Min. Temperature: {this.props.extraData.temperatureMin}</p>
                     <p>Precipitation: {this.props.extraData.precipIntensity}%</p>
                     <p>Wind: {this.props.extraData.windSpeed}Km/h</p>

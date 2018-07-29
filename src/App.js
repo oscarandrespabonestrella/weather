@@ -23,11 +23,14 @@ class App extends Component {
     super(props);
     this.state = {
       address:'',
-      position:{},
+      position:[],
       weatherCity:{},
       forecastCity:{},
       classBackground: "default",
-      days: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+      days: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+      lastMonthTimes:[],
+      lastMonthForecast:[],
+      auxButtonHistory:true
     }
   }
 
@@ -49,17 +52,19 @@ class App extends Component {
   }
   getCityWeather = async (lat,lng)=>{
     let position = {latitude: lat, longitude: lng }
-    let weather = JSON.parse(localStorage.getItem('weatherForecast'))
-    let Currentweather =JSON.parse(localStorage.getItem('currentweather'))
+    // Auxiliar classes to save api calls
+    // let weather = JSON.parse(localStorage.getItem('weatherForecast'))
+    // let Currentweather =JSON.parse(localStorage.getItem('currentweather'))
     try{
-      if(Currentweather == null){
-        Currentweather = await DarkSkyApi.loadCurrent(position)
+      // if(Currentweather == null){
+        this.setState({lastMonthForecast:[]})
+        let Currentweather = await DarkSkyApi.loadCurrent(position)
         // localStorage.setItem('currentweather',JSON.stringify(Currentweather))
-      }
-      if(weather == null){
-        weather = await DarkSkyApi.loadForecast(position)
+      // }
+      // if(weather == null){
+        let weather = await DarkSkyApi.loadForecast(position)
         // localStorage.setItem('weatherForecast',JSON.stringify(weather))
-      }
+      // }
       this.setState({weatherCity:Currentweather,forecastCity : weather,position:position});
       this.setState({classBackground:Currentweather.icon})
     }catch(e){
@@ -67,78 +72,92 @@ class App extends Component {
     }
   }
 
+  populateLastMonth = async ()=>{
+    try{
+      // Auxiliar classes to save api calls
+      // let lastMonth = JSON.parse(localStorage.getItem('lastMonth'))
+      // if(lastMonth == null){
+        for(let i=30; i>=1;i--){
+            var d = new Date();
+            let day = Math.floor(d.setDate(d.getDate() - i) / 1000)
+            let response = await DarkSkyApi.loadTime(day, this.state.position)
+            this.setState({ lastMonthForecast: [...this.state.lastMonthForecast, response] })
+        }
+      //   localStorage.setItem('lastMonth',JSON.stringify(this.state.lastMonthForecast))
+      // }else{
+      //   this.setState({ lastMonthForecast: lastMonth})
+      // }
+    }catch(e){
+      console.log(e)
+    }
+
+  }
+
   populateWeek = () => {
     const week = this.state.forecastCity.daily.data;
     const listItems = week.map((day,index) =>
       <ForecastItem
-        extraData={{rain: day.precipIntensity, windSpeed: day.windSpeed, pressure: day.pressure,temperatureMin:day.temperatureMin}}
+        extraData={{rain: day.precipProbability, windSpeed: day.windSpeed, pressure: day.pressure,temperatureMin:day.temperatureMin}}
         key={index}
+        id={index}
         day={this.state.days[new Date(day.dateTime).getDay()]}
         temperature={day.temperatureMax}
         icon={day.icon}
       />
     );
     return (
-      <div className="row">
-          <div className="col-8">
+      <div className="col-12 d-flex justify-content-center">
+          <div className="col-12 col-md-8">
             <div className="graph d-flex justify-content-between">{listItems}</div>
         </div>
       </div>
     );
   }
-  populateLastMonth = async () => {
-    const week = this.state.forecastCity.daily.data;
-    try{
-      const weatherLastMonth = await DarkSkyApi.loadTime("time", this.state.position)
-      const listItems = week.map((day,index) =>
-        <ForecastItem
-          extraData={{rain: day.precipIntensity, windSpeed: day.windSpeed, pressure: day.pressure,temperatureMin:day.temperatureMin}}
-          key={index}
-          day={this.state.days[new Date(day.dateTime).getDay()]}
-          temperature={day.temperatureMax}
-          icon={day.icon}
-        />
+  createLastMonthsCards= () => {
+
+      const previousDays = this.state.lastMonthForecast.map((day,index) =>
+      <ForecastItem
+        extraData={{rain: day.currently.precipProbability, windSpeed: day.currently.windSpeed, pressure: day.currently.pressure,temperatureMin:day.currently.temperature}}
+        key={index}
+        id={index}
+        day={new Date(day.currently.dateTime).toLocaleDateString('nl-Be')}
+        temperature={day.currently.temperature}
+        icon={day.currently.icon}
+      />
       );
       return (
-        <div className="row">
-            <div className="col-8">
-              <div className="graph d-flex justify-content-between">{listItems}</div>
+        <div className="col-12">
+            <div className="col-12">
+              <div className="graph lastMonth d-flex justify-content-between">{previousDays}</div>
           </div>
         </div>
       );
-    }catch(e){
-
-    }
-
   }
 
   render() {
     let componentDataWeather
     let ForecastWeek
+    let RenderLastMonth
+    let showHistory
     if(this.state.classBackground!='default'){
-      componentDataWeather = <DayCard weatherCity={this.state.weatherCity} forecastCity={this.state.forecastCity}></DayCard>
-      ForecastWeek = this.populateWeek()
+      componentDataWeather = <DayCard  weatherCity={this.state.weatherCity} forecastCity={this.state.forecastCity}></DayCard>
+      ForecastWeek = this.populateWeek();
+      RenderLastMonth = this.createLastMonthsCards();
+      showHistory =  <div className="col-12 d-flex justify-content-center"><button onClick={this.populateLastMonth}> SHOW LAST MONTH HISTORY</button></div>
     }
-    let classFinal = 'App ' + this.state.classBackground
+    let classFinal = 'App row ' + this.state.classBackground
     return (
       <div className={classFinal}>
-        <div className="row">
+        <div className="col-12 col-md-4">
           <header className="App-header">
             <h1 className="App-title">Weather</h1>
           </header>
+          <GeocoderInput value={this.state.address} onChange={this.handleChange} onSelect={this.handleSelect} />
         </div>
-        <div className="row">
-          <div className="d-flex justify-content-center align-items-center flex-column">
-            <GeocoderInput value={this.state.address} onChange={this.handleChange} onSelect={this.handleSelect} />
-          </div>
-        </div>
-        <div className="row">
-          {componentDataWeather}
-        </div>
+        {componentDataWeather}
         {ForecastWeek}
-        <div className="row">
-          <button> SHOW LAST MONTH HISTORY</button>
-        </div>
+        {showHistory}
+        {RenderLastMonth}
       </div>
     );
   }
