@@ -1,4 +1,3 @@
-* [0](/madewithlove/technical-assignment-front-end-engineer-oscarandrespabonestrella/network/members)
 
 # <svg></svg> [madewithlove](/madewithlove)/ **[technical-assignment-front-end-engineer-oscarandrespabonestrella](/madewithlove/technical-assignment-front-end-engineer-oscarandrespabonestrella)** Private
 
