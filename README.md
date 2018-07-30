@@ -1,15 +1,3 @@
-[Skip to content](#start-of-content)
-
-* [Pull requests](/pulls)
-* [Issues](/issues)
-* [Marketplace](/marketplace)
-* [Explore](/explore)
-
-* <details></details>
-* <details></details>
-
-*
-*
 * [0](/madewithlove/technical-assignment-front-end-engineer-oscarandrespabonestrella/network/members)
 
 # <svg></svg> [madewithlove](/madewithlove)/ **[technical-assignment-front-end-engineer-oscarandrespabonestrella](/madewithlove/technical-assignment-front-end-engineer-oscarandrespabonestrella)** Private
