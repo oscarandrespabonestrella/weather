@@ -1,0 +1,38 @@
+.default{
+    @include linear-gradient('bottom',#2C5364, #0F2027);
+}
+
+.clear-day{
+@include linear-gradient('bottom',#fdbb2d, #22c1c3);
+}
+
+.rain{
+@include linear-gradient('top',#191654, #43C6AC);
+}
+
+.clear-night{
+@include linear-gradient('top',#3A6073, #16222A);
+}
+
+.snow{
+@include linear-gradient('top',#d7d2cc, #304352);
+}
+.sleet{
+@include linear-gradient('top',#eef2f3, #8e9eab);
+}
+.wind{
+@include linear-gradient('top',#00223E, #FFA17F);
+}
+.fog{
+@include linear-gradient('top',#cbb4d4, #20002c);
+}
+.cloudy{
+@include linear-gradient('top',#1cefff, #c0c0aa);
+}
+.partly-cloudy-day{
+@include linear-gradient('top',#19547b, #ffd89b);
+}
+
+.partly-cloudy-night{
+@include linear-gradient('top',#F29492, #114357);
+}

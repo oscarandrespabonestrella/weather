@@ -1,16 +1,18 @@
+//libraries
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import DarkSkyApi from 'dark-sky-api';
+import {connect} from "react-redux";
+import { setPlace } from './store/actions/mainActions'
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from 'react-places-autocomplete';
+
+//Components
 import GeocoderInput from "./components/GeocoderInput"
 import DayCard from "./components/DayCard"
-import ForecastItem from "./components/ForecastItem"
-import DarkSkyApi from 'dark-sky-api';
-import {connect} from "react-redux";
-import { setPlace } from './store/actions/mainActions'
+import Week from "./components/Week"
+import LastMonthItem from "./components/LastMonthItem"
 
 
 DarkSkyApi.apiKey = '3c03d34bbb55c5dc401264a0222d6291';
@@ -27,7 +29,6 @@ class App extends Component {
       weatherCity:{},
       forecastCity:{},
       classBackground: "default",
-      days: ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
       lastMonthTimes:[],
       lastMonthForecast:[],
       auxButtonHistory:true
@@ -41,15 +42,13 @@ class App extends Component {
   handleSelect = address =>{
       this.setState({ address });
       geocodeByAddress(address)
-      .then(result=>getLatLng(result[0]))
-      .then(({lat,lng})=>{
+        .then(result=>getLatLng(result[0]))
+        .then(({lat,lng})=>{
           this.props.setCoordinates([lat,lng])
           this.getCityWeather(lat,lng)
       })
   }
-  componentDidMount(){
 
-  }
   getCityWeather = async (lat,lng)=>{
     let position = {latitude: lat, longitude: lng }
     // Auxiliar classes to save api calls
@@ -65,8 +64,8 @@ class App extends Component {
         let weather = await DarkSkyApi.loadForecast(position)
         // localStorage.setItem('weatherForecast',JSON.stringify(weather))
       // }
-      this.setState({weatherCity:Currentweather,forecastCity : weather,position:position});
-      this.setState({classBackground:Currentweather.icon})
+        this.setState({weatherCity:Currentweather,forecastCity : weather,position:position});
+        this.setState({classBackground:Currentweather.icon})
     }catch(e){
       console.log(e)
     }
@@ -90,48 +89,6 @@ class App extends Component {
     }catch(e){
       console.log(e)
     }
-
-  }
-
-  populateWeek = () => {
-    const week = this.state.forecastCity.daily.data;
-    const listItems = week.map((day,index) =>
-      <ForecastItem
-        extraData={{rain: day.precipProbability, windSpeed: day.windSpeed, pressure: day.pressure,temperatureMin:day.temperatureMin}}
-        key={index}
-        id={index}
-        day={this.state.days[new Date(day.dateTime).getDay()]}
-        temperature={day.temperatureMax}
-        icon={day.icon}
-      />
-    );
-    return (
-      <div className="col-12 d-flex justify-content-center">
-          <div className="col-12 col-md-8">
-            <div className="graph d-flex justify-content-between">{listItems}</div>
-        </div>
-      </div>
-    );
-  }
-  createLastMonthsCards= () => {
-      console.log(this.state.lastMonthForecast)
-      const previousDays = this.state.lastMonthForecast.map((day,index) =>
-      <ForecastItem
-        extraData={{rain: day.daily.data[0].precipProbability, windSpeed: day.daily.data[0].windSpeed, pressure: day.daily.data[0].pressure,temperatureMin:day.daily.data[0].temperature}}
-        key={index}
-        id={index}
-        day={new Date(day.daily.data[0].dateTime).toLocaleDateString('nl-Be')}
-        temperature={day.daily.data[0].temperature}
-        icon={day.daily.data[0].icon}
-      />
-      );
-      return (
-        <div className="col-12">
-            <div className="col-12">
-              <div className="graph lastMonth d-flex justify-content-between">{previousDays}</div>
-          </div>
-        </div>
-      );
   }
 
   render() {
@@ -141,16 +98,16 @@ class App extends Component {
     let showHistory
     if(this.state.classBackground!='default'){
       componentDataWeather = <DayCard  weatherCity={this.state.weatherCity} forecastCity={this.state.forecastCity}></DayCard>
-      ForecastWeek = this.populateWeek();
-      RenderLastMonth = this.createLastMonthsCards();
+      ForecastWeek = <Week week={this.state.forecastCity.daily.data}></Week>
       showHistory =  <div className="col-12 d-flex justify-content-center"><button onClick={this.populateLastMonth}> SHOW LAST MONTH HISTORY</button></div>
+      RenderLastMonth = <LastMonthItem lastMonthForecast={this.state.lastMonthForecast}></LastMonthItem>
     }
-    let classFinal = 'App row ' + this.state.classBackground
+    let classFinal = 'app row ' + this.state.classBackground
     return (
       <div className={classFinal}>
         <div className="col-12 col-md-4">
-          <header className="App-header">
-            <h1 className="App-title">Weather</h1>
+          <header className="app-header">
+            <h1 className="app-title">Weather</h1>
           </header>
           <GeocoderInput value={this.state.address} onChange={this.handleChange} onSelect={this.handleSelect} />
         </div>
@@ -162,9 +119,6 @@ class App extends Component {
     );
   }
 }
-
-
-
 
 const mapDispatchToProps = dispatch =>{
   return{

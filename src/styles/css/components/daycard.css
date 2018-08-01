@@ -1,0 +1,27 @@
+.weather-main-card i {
+  color: #fff; }
+.weather-main-card p:hover {
+  color: #fff; }
+.weather-main-card > div:nth-child(2) span {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.7rem;
+  margin-left: 10px; }
+  .weather-main-card > div:nth-child(2) span:hover {
+    color: #fff; }
+.weather-main-card .icon-container {
+  margin-top: 20px; }
+  .weather-main-card .icon-container > div:first-child {
+    width: 200px; }
+  .weather-main-card .icon-container > div:nth-child(3) {
+    margin-left: 7px;
+    margin-bottom: 17px; }
+    .weather-main-card .icon-container > div:nth-child(3) span {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.8rem;
+      margin-left: 3px; }
+      .weather-main-card .icon-container > div:nth-child(3) span:hover {
+        color: white; }
+  .weather-main-card .icon-container h1, .weather-main-card .icon-container p {
+    margin: 0; }
+
+/*# sourceMappingURL=daycard.css.map */

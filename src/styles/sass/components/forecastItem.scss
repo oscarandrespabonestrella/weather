@@ -1,0 +1,53 @@
+
+.forecast-item {
+    span{
+      color: rgba(255, 255, 255, 0.7)
+    }
+    .type-light P{
+      color: rgb(26, 26, 26);
+    }
+    .temp
+    {
+      color: rgba(255,255,255,0.6);
+      font-size: 11px;
+      i{
+        display: block;
+        padding-bottom: 3px;
+        font-size: 15px;
+      }
+      &:hover{
+        color: #fff;
+        i{
+          color: #fff;
+        }
+      }
+    }
+    .knob{
+      margin: 0 20px;
+      cursor: pointer;
+    }
+  }
+
+
+.lastMonth{
+    overflow-x: auto;
+    padding-bottom: 30px;
+    &::-webkit-scrollbar-track
+    {
+
+      background-color: rgba(255,255,255,0.3);
+    }
+
+    &::-webkit-scrollbar
+    {
+      height: 4px;
+      background-color: rgba(255,255,255,0.3);
+    }
+
+    &::-webkit-scrollbar-thumb
+    {
+      background-color: rgba(255,255,255,0.5);
+      border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 3px;
+    }
+  }

@@ -26,8 +26,8 @@ class ForecasItem extends Component {
         let Icon = this.state.icon[this.props.icon]
         let toltipID = "toolTip"+this.props.id
         return (
-            <div data-type="light" data-tip='' data-for={toltipID} className="graph-knob">
-                <span className="graph-temp">
+            <div data-type="light" data-tip='' data-for={toltipID} className="knob">
+                <span className="temp">
                   <WeatherIcons name={Icon} />
                   {this.props.temperature}<sup>&deg;</sup><br/>
                   {this.props.day}

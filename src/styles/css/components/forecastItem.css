@@ -1,0 +1,33 @@
+.forecast-item span {
+  color: rgba(255, 255, 255, 0.7); }
+.forecast-item .type-light P {
+  color: #1a1a1a; }
+.forecast-item .temp {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 11px; }
+  .forecast-item .temp i {
+    display: block;
+    padding-bottom: 3px;
+    font-size: 15px; }
+  .forecast-item .temp:hover {
+    color: #fff; }
+    .forecast-item .temp:hover i {
+      color: #fff; }
+.forecast-item .knob {
+  margin: 0 20px;
+  cursor: pointer; }
+
+.lastMonth {
+  overflow-x: auto;
+  padding-bottom: 30px; }
+  .lastMonth::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0.3); }
+  .lastMonth::-webkit-scrollbar {
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.3); }
+  .lastMonth::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 3px; }
+
+/*# sourceMappingURL=forecastItem.css.map */

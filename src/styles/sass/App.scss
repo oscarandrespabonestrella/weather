@@ -1,0 +1,68 @@
+@import "components/mixins";
+@import "components/daycard";
+@import "components/backgroundGradients";
+@import "components/forecastItem";
+
+
+.app {
+
+  height: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  // flex-direction: column;
+}
+
+.app-header {
+  padding: 20px;
+  color: white;
+}
+
+.app-title {
+  font-size: 1em;
+}
+
+.app-intro {
+  font-size: large;
+}
+
+.location-search-input{
+  background: transparent;
+  border:0;
+  border-bottom: 2px solid #ddd;
+  padding: 10px 5px;
+  width: 100%;
+  color: #fff;
+  font-size: 20px;
+  &:focus{
+    outline: 0px;
+  }
+}
+
+.forecast-item
+{
+  margin-top: 50px;
+  padding-bottom: 50px;
+  overflow-x: auto;
+}
+
+
+button{
+  background: none;
+  padding: 10px 15px;
+  border: 2px solid #fff;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  &:hover{
+    background: rgba(255,255,255,0.7);
+  }
+}
+
+
+.autocomplete-dropdown-container{
+  width: 100%;
+}
+

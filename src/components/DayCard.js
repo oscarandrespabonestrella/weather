@@ -12,7 +12,7 @@ class Daycard extends Component {
         return (
             <div className="col-12 d-flex justify-content-center">
                 <div className="col-12 col-md-5 weather-main-card">
-                    <div className="iconContainer d-flex align-items-center" >
+                    <div className="icon-container d-flex align-items-center" >
                         <div >
                             <Skycons  color='white' icon={this.props.weatherCity.icon.replace(/-/g,'_').toUpperCase()} autoplay={true} />
                         </div>
