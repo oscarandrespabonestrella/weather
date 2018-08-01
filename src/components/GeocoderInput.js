@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng,
-} from 'react-places-autocomplete';
+import PlacesAutocomplete from 'react-places-autocomplete';
 
 const styleDropdown = {
     backgroundColor: 'transparent',

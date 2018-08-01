@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Skycons from 'react-skycons'
 import WeatherIcons from 'react-weathericons';
 import ReactTooltip from 'react-tooltip'
 

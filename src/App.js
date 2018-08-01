@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import DarkSkyApi from 'dark-sky-api';
 import {connect} from "react-redux";
 import { setPlace } from './store/actions/mainActions'
-import PlacesAutocomplete, {
+import {
   geocodeByAddress,
   getLatLng,
 } from 'react-places-autocomplete';
@@ -96,7 +96,7 @@ class App extends Component {
     let ForecastWeek
     let RenderLastMonth
     let showHistory
-    if(this.state.classBackground!='default'){
+    if(this.state.classBackground!=='default'){
       componentDataWeather = <DayCard  weatherCity={this.state.weatherCity} forecastCity={this.state.forecastCity}></DayCard>
       ForecastWeek = <Week week={this.state.forecastCity.daily.data}></Week>
       showHistory =  <div className="col-12 d-flex justify-content-center"><button onClick={this.populateLastMonth}> SHOW LAST MONTH HISTORY</button></div>
@@ -133,5 +133,3 @@ const mapStateToProps = data => {
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(App);
-
-

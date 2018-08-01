@@ -19,7 +19,7 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "sass" : "sass --watch src/styles/sass:src/styles/css" ,
+    "sass": "sass --watch src/styles/sass:src/styles/css",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p sass start-js",
@@ -29,6 +29,15 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "babel-eslint": "7.2.3",
+    "eslint": "4.1.1",
+    "eslint-config-react-app": "^2.1.0",
+    "eslint-plugin-flowtype": "2.34.1",
+    "eslint-plugin-import": "2.6.0",
+    "eslint-plugin-jsx-a11y": "5.1.1",
+    "eslint-plugin-prettier": "^2.6.2",
+    "eslint-plugin-react": "7.1.0",
+    "prettier": "1.14.0",
     "sass-loader": "^7.0.3"
   }
 }
