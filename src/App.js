@@ -114,15 +114,15 @@ class App extends Component {
     );
   }
   createLastMonthsCards= () => {
-
+      console.log(this.state.lastMonthForecast)
       const previousDays = this.state.lastMonthForecast.map((day,index) =>
       <ForecastItem
-        extraData={{rain: day.currently.precipProbability, windSpeed: day.currently.windSpeed, pressure: day.currently.pressure,temperatureMin:day.currently.temperature}}
+        extraData={{rain: day.daily.data[0].precipProbability, windSpeed: day.daily.data[0].windSpeed, pressure: day.daily.data[0].pressure,temperatureMin:day.daily.data[0].temperature}}
         key={index}
         id={index}
-        day={new Date(day.currently.dateTime).toLocaleDateString('nl-Be')}
-        temperature={day.currently.temperature}
-        icon={day.currently.icon}
+        day={new Date(day.daily.data[0].dateTime).toLocaleDateString('nl-Be')}
+        temperature={day.daily.data[0].temperature}
+        icon={day.daily.data[0].icon}
       />
       );
       return (
